@@ -221,8 +221,10 @@ function setupHardwareRotator() {
     slides.forEach((slide, i) => {
       if (i === currentIndex) {
         slide.classList.add('active');
+        slide.style.display = 'block';
       } else {
         slide.classList.remove('active');
+        slide.style.display = 'none';
       }
     });
 
