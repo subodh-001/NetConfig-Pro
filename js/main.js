@@ -35,8 +35,10 @@ const basePricing = {
     mikrotik: { name: 'MikroTik RouterOS', base: 699 },
     unifi: { name: 'Ubiquiti UniFi Ecosystem', base: 799 },
     cisco: { name: 'Cisco Switches & Routers', base: 899 },
-    fortinet: { name: 'Fortinet FortiGate Firewall', base: 1199 },
-    pfsense: { name: 'pfSense / OPNsense', base: 899 },
+    fortinet: { name: 'Fortinet FortiGate Firewall', base: 1499 },
+    sonicwall: { name: 'SonicWall TZ & NSa Firewalls', base: 1499 },
+    sophos: { name: 'Sophos XGS Next-Gen Firewall', base: 1499 },
+    pfsense: { name: 'pfSense / OPNsense Appliance', base: 1299 },
     tplink: { name: 'TP-Link Omada SDN', base: 599 },
     other: { name: 'Other Enterprise Router/Switch', base: 599 }
   },
@@ -56,6 +58,8 @@ const basePricing = {
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
   setupNavigation();
+  setupHeroSearch();
+  setupHardwareRotator();
   setupCalculator();
   setupTerminal();
   setupSocialProofToasts();
@@ -93,14 +97,202 @@ function setupNavigation() {
     window.addEventListener('scroll', () => {
       if (window.scrollY > 20) {
         header.style.background = 'rgba(255,255,255,0.98)';
-        header.style.boxShadow = '0 2px 12px rgba(11,40,61,0.08)';
-        header.style.borderBottomColor = '#E5E7EB';
+        header.style.boxShadow = '0 4px 16px rgba(0,23,55,0.08)';
+        header.style.borderBottomColor = '#E2E8F0';
       } else {
         header.style.background = 'rgba(255,255,255,0.95)';
-        header.style.boxShadow = '0 1px 4px rgba(11,40,61,0.04)';
+        header.style.boxShadow = '0 1px 4px rgba(0,23,55,0.03)';
       }
     });
   }
+}
+
+// ==========================================
+// INTERACTIVE HERO EQUIPMENT SEARCH BAR
+// ==========================================
+function setupHeroSearch() {
+  const searchInput = document.getElementById('heroModelSearch');
+  const searchBtn = document.getElementById('heroSearchBtn');
+  const quickTags = document.querySelectorAll('.hero-quick-tag');
+
+  function executeSearch(query) {
+    if (!query) return;
+    const q = query.toLowerCase().trim();
+    let targetId = null;
+
+    if (q.includes('mikro') || q.includes('routeros') || q.includes('5009') || q.includes('hex') || q.includes('ax3') || q.includes('ccr') || q.includes('winbox') || q.includes('mangle')) {
+      targetId = 'mikrotik';
+    } else if (q.includes('unifi') || q.includes('ubiquiti') || q.includes('udm')) {
+      targetId = 'unifi';
+    } else if (q.includes('firewall') || q.includes('pfsense') || q.includes('fortinet') || q.includes('fortigate') || q.includes('sophos') || q.includes('sonicwall') || q.includes('opnsense')) {
+      targetId = 'switches';
+      document.querySelector('.brand-tab-btn[data-tab="firewalls"]')?.click();
+    } else if (q.includes('cctv') || q.includes('nvr') || q.includes('dvr') || q.includes('camera') || q.includes('hikvision') || q.includes('dahua') || q.includes('nas') || q.includes('synology') || q.includes('qnap') || q.includes('storage')) {
+      targetId = 'switches';
+      document.querySelector('.brand-tab-btn[data-tab="cctv-nas"]')?.click();
+    } else if (q.includes('voip') || q.includes('pbx') || q.includes('phone') || q.includes('grandstream') || q.includes('yeastar') || q.includes('sip')) {
+      targetId = 'switches';
+      document.querySelector('.brand-tab-btn[data-tab="voip"]')?.click();
+    } else if (q.includes('wifi') || q.includes('ap') || q.includes('access point') || q.includes('capsman') || q.includes('roam') || q.includes('eap') || q.includes('u6') || q.includes('u7')) {
+      targetId = 'switches';
+      document.querySelector('.brand-tab-btn[data-tab="wifi"]')?.click();
+    } else if (q.includes('draytek') || q.includes('vigor') || q.includes('omada') || q.includes('er605') || q.includes('bridge') || q.includes('modem') || q.includes('ont') || q.includes('onu')) {
+      targetId = 'switches';
+      document.querySelector('.brand-tab-btn[data-tab="routers"]')?.click();
+    } else if (q.includes('cisco') || q.includes('switch') || q.includes('vlan') || q.includes('trunk') || q.includes('lacp') || q.includes('aruba') || q.includes('catalyst')) {
+      targetId = 'switches';
+      document.querySelector('.brand-tab-btn[data-tab="switches"]')?.click();
+    } else if (q.includes('failover') || q.includes('pcc') || q.includes('dual wan') || q.includes('airtel') || q.includes('jio') || q.includes('load balance')) {
+      targetId = 'failover-demo';
+    } else if (q.includes('price') || q.includes('rate') || q.includes('cost') || q.includes('plan') || q.includes('pack')) {
+      targetId = 'pricing';
+    } else if (q.includes('calc') || q.includes('estimate') || q.includes('quote')) {
+      targetId = 'calculator';
+    } else if (q.includes('contact') || q.includes('call') || q.includes('book') || q.includes('phone') || q.includes('form')) {
+      targetId = 'contact';
+    } else if (q.includes('faq') || q.includes('question') || q.includes('ultraviewer') || q.includes('anydesk')) {
+      targetId = 'faq';
+    } else {
+      targetId = 'switches';
+    }
+
+    const targetEl = document.getElementById(targetId);
+    if (targetEl) {
+      targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      targetEl.classList.add('ring-4', 'ring-[#005CE6]/30', 'transition-all', 'duration-500');
+      setTimeout(() => {
+        targetEl.classList.remove('ring-4', 'ring-[#005CE6]/30');
+      }, 2000);
+    }
+  }
+
+  if (searchBtn && searchInput) {
+    searchBtn.addEventListener('click', () => {
+      executeSearch(searchInput.value);
+    });
+
+    searchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        executeSearch(searchInput.value);
+      }
+    });
+  }
+
+  quickTags.forEach(tag => {
+    tag.addEventListener('click', () => {
+      const targetSelector = tag.getAttribute('data-target');
+      if (targetSelector) {
+        const el = document.querySelector(targetSelector);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          el.classList.add('ring-4', 'ring-[#005CE6]/30', 'transition-all', 'duration-500');
+          setTimeout(() => {
+            el.classList.remove('ring-4', 'ring-[#005CE6]/30');
+          }, 2000);
+        }
+      }
+    });
+  });
+}
+
+// ==========================================
+// ROTATIONAL HARDWARE & BRAND SHOWCASE CAROUSEL
+// ==========================================
+function setupHardwareRotator() {
+  const rotator = document.getElementById('hardwareRotator');
+  if (!rotator) return;
+
+  const slides = rotator.querySelectorAll('.rotator-slide');
+  const tabs = rotator.querySelectorAll('.rotator-tab-btn');
+  const dots = rotator.querySelectorAll('.rotator-dot');
+  const prevBtn = document.getElementById('rotatorPrevBtn');
+  const nextBtn = document.getElementById('rotatorNextBtn');
+
+  let currentIndex = 0;
+  const totalSlides = slides.length;
+  let autoRotateInterval = null;
+
+  function showSlide(index) {
+    if (index < 0) index = totalSlides - 1;
+    if (index >= totalSlides) index = 0;
+    currentIndex = index;
+
+    slides.forEach((slide, i) => {
+      if (i === currentIndex) {
+        slide.classList.add('active');
+      } else {
+        slide.classList.remove('active');
+      }
+    });
+
+    tabs.forEach((tab, i) => {
+      if (i === currentIndex) {
+        tab.classList.add('active');
+      } else {
+        tab.classList.remove('active');
+      }
+    });
+
+    dots.forEach((dot, i) => {
+      if (i === currentIndex) {
+        dot.classList.add('active');
+      } else {
+        dot.classList.remove('active');
+      }
+    });
+  }
+
+  function nextSlide() {
+    showSlide(currentIndex + 1);
+  }
+
+  function prevSlide() {
+    showSlide(currentIndex - 1);
+  }
+
+  function startAutoRotate() {
+    stopAutoRotate();
+    autoRotateInterval = setInterval(nextSlide, 3500);
+  }
+
+  function stopAutoRotate() {
+    if (autoRotateInterval) {
+      clearInterval(autoRotateInterval);
+      autoRotateInterval = null;
+    }
+  }
+
+  // Event Listeners for Nav buttons
+  if (nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); startAutoRotate(); });
+  if (prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); startAutoRotate(); });
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const slideIndex = parseInt(tab.getAttribute('data-slide'), 10);
+      if (!isNaN(slideIndex)) {
+        showSlide(slideIndex);
+        startAutoRotate();
+      }
+    });
+  });
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      const slideIndex = parseInt(dot.getAttribute('data-slide'), 10);
+      if (!isNaN(slideIndex)) {
+        showSlide(slideIndex);
+        startAutoRotate();
+      }
+    });
+  });
+
+  // Pause on hover
+  rotator.addEventListener('mouseenter', stopAutoRotate);
+  rotator.addEventListener('mouseleave', startAutoRotate);
+
+  // Initialize auto rotation
+  startAutoRotate();
 }
 
 // ==========================================
@@ -355,12 +547,27 @@ function setupBrandTabs() {
       btn.classList.add('active');
 
       brandCards.forEach(card => {
-        if (brand === 'all' || card.dataset.brand === brand) {
+        const cardBrands = (card.dataset.brand || '').split(' ');
+        if (brand === 'all' || cardBrands.includes(brand) || card.dataset.brand === brand) {
           card.classList.remove('hidden');
         } else {
           card.classList.add('hidden');
         }
       });
+    });
+  });
+
+  // Connect Flipkart/Uber style category shortcut cards to the tabs
+  const shortcutCards = document.querySelectorAll('.category-shortcut-card');
+  shortcutCards.forEach(card => {
+    card.addEventListener('click', () => {
+      const cat = card.dataset.cat;
+      if (cat) {
+        const targetBtn = document.querySelector(`.brand-tab-btn[data-tab="${cat}"]`);
+        if (targetBtn) {
+          targetBtn.click();
+        }
+      }
     });
   });
 }

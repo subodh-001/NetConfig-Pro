@@ -57,6 +57,24 @@ echo -e "   Directory:    ${SCRIPT_DIR}"
 echo -e "   Stop Server:  Press ${C_YELLOW}Ctrl + C${C_RESET} anytime\n"
 echo -e "${C_CYAN}──────────────────────────────────────────────────────────────${C_RESET}\n"
 
-# 4. Start Python HTTP Server
-exec python3 -m http.server "$PORT"
+# 4. Start Python HTTP Server with socket address reuse enabled (prevents TIME_WAIT conflicts)
+exec python3 -c "
+import socketserver, http.server, sys
+
+port = int(sys.argv[1]) if len(sys.argv) > 1 else 3345
+
+class ReusableTCPServer(socketserver.TCPServer):
+    allow_reuse_address = True
+
+Handler = http.server.SimpleHTTPRequestHandler
+try:
+    with ReusableTCPServer(('', port), Handler) as httpd:
+        httpd.serve_forever()
+except OSError as e:
+    # If 3345 is still held by an external process, try next port
+    fallback_port = port + 1
+    print(f'Port {port} busy, trying fallback port {fallback_port}...')
+    with ReusableTCPServer(('', fallback_port), Handler) as httpd:
+        httpd.serve_forever()
+" "$PORT"
 
