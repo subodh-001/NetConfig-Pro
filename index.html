@@ -11,7 +11,7 @@
   <meta name="keywords" content="router configuration service, router setup service, who can configure mikrotik router, mikrotik configuration service, mikrotik router setup, mikrotik dual wan load balancing setup, ubiquiti unifi setup expert, unifi dream machine configuration, unifi setup service, unifi cloud gateway setup, switch configuration service, cisco switch configuration, cisco vlan setup remote, dual wan setup service, failover router setup airtel jio, one time router configuration, remote network engineer for hire, network configuration specialist, wifi router setup expert, pfsense setup remote, fortinet fortigate configuration, ultraviewer router setup, anydesk router configuration, remote router engineer india, router setup near me, office network configuration service, internet failover setup, wireguard vpn router setup">
   <meta name="author" content="NetConfig Pro - Certified Network Engineer">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-  <link rel="canonical" href="https://netconfigpro.com/">
+  <link rel="canonical" href="https://netconfig.alwaystherevault.com/">
 
   <!-- Geo & Regional Tags for Local and Global Google Ranking -->
   <meta name="geo.region" content="IN">
@@ -22,7 +22,7 @@
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://netconfigpro.com/">
+  <meta property="og:url" content="https://netconfig.alwaystherevault.com/">
   <meta property="og:site_name" content="NetConfig Pro">
   <meta property="og:title" content="Router & Switch Configuration Service | MikroTik, UniFi & Network Engineer">
   <meta property="og:description" content="Need your router or switch configured? Professional one-time remote setup for MikroTik, UniFi, and Cisco switches starting at ₹699. Pay only after testing.">
@@ -30,7 +30,7 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://netconfigpro.com/">
+  <meta name="twitter:url" content="https://netconfig.alwaystherevault.com/">
   <meta name="twitter:title" content="Router & Switch Configuration Service | MikroTik & UniFi Expert">
   <meta name="twitter:description" content="One-time remote network setup for MikroTik, UniFi, and Cisco switches via UltraViewer / AnyDesk starting at ₹699. Zero advance payment.">
   <meta name="twitter:image" content="https://cdn.mikrotik.com/web-assets/rb_images/2065_lg.webp">
@@ -42,7 +42,7 @@
     "@type": "ProfessionalService",
     "name": "NetConfig Pro - Router & Switch Configuration Services",
     "image": "https://cdn.mikrotik.com/web-assets/rb_images/2065_lg.webp",
-    "url": "https://netconfigpro.com/",
+    "url": "https://netconfig.alwaystherevault.com/",
     "telephone": "+919076314255",
     "priceRange": "₹699 - ₹1999",
     "currenciesAccepted": "INR, USD",
@@ -181,6 +181,65 @@
   }
   </script>
 
+  <!-- Schema.org HowTo for Google Featured Snippets & Step-by-Step Rich Cards -->
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "How to Configure MikroTik Dual-WAN PCC Load Balancing with 0-Second Failover",
+      "description": "Step-by-step guide to configure MikroTik RouterOS Per Connection Classifier (PCC) with Airtel and Jio Dual-WAN lines and recursive routing failover without dropping active sessions.",
+      "totalTime": "PT45M",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Configure IP Addresses and WAN Gateways",
+          "text": "Assign static or DHCP-client IP addresses to ether1 (ISP 1 - Airtel) and ether2 (ISP 2 - Jio). Set up LAN bridge on ether3-ether5 with local subnet 192.168.88.1/24."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Set Up Mangle Rules for PCC Connection Tracking",
+          "text": "In IP > Firewall > Mangle, add prerouting rules to accept local traffic, and mark connections using per-connection-classifier (both-addresses: 2/0 for WAN1 and 2/1 for WAN2)."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Create Routing Marks and Recursive Routes",
+          "text": "Add routing mark rules pointing to to_WAN1 and to_WAN2 routing tables. Configure recursive default routes using 8.8.8.8 and 1.1.1.1 with check-gateway=ping for instant failover."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Test 0-Second Live Failover",
+          "text": "Start a live speed test or video stream, physically unplug the ISP 1 cable, and confirm zero dropped packets with seamless failover to ISP 2."
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "How to Configure Ubiquiti UniFi UDM-Pro Multi-VLAN Network Isolation",
+      "description": "Step-by-step guide to segregate corporate networks, guest Wi-Fi, and IoT/CCTV cameras into isolated VLANs on UniFi Dream Machine Pro.",
+      "totalTime": "PT60M",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Create Isolated Virtual Networks",
+          "text": "In UniFi Network Settings > Networks, create Corporate (VLAN 10), Guest (VLAN 20), and CCTV (VLAN 30) with distinct DHCP scopes."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Assign Switch Port Profiles",
+          "text": "Assign All (Trunk) profiles to UniFi Access Points and uplinks. Set native VLAN 30 to CCTV NVR ports to isolate cameras from the internal LAN."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Implement Firewall Isolation Rules",
+          "text": "In Firewall & Security > Traffic Rules, add an Inter-VLAN blocking rule from Guest/IoT to Corporate, and enable mDNS for local casting."
+        }
+      ]
+    }
+  ]
+  </script>
+
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -212,7 +271,7 @@
   </script>
 
   <!-- Custom Stylesheet with Reference Theme -->
-  <link rel="stylesheet" href="css/styles.css?v=2.2">
+  <link rel="stylesheet" href="css/styles.css?v=2.3">
 </head>
 <body class="bg-[#FFFFFF] text-[#001737] font-sans selection:bg-[#001737] selection:text-white">
 
@@ -274,6 +333,9 @@
         </a>
         <a href="#switches" class="hover:text-[#005CE6] transition-colors py-1 whitespace-nowrap">
           Switches & Routers
+        </a>
+        <a href="#setup-guides" class="hover:text-[#005CE6] transition-colors py-1 whitespace-nowrap">
+          Guides
         </a>
         <a href="#failover-demo" class="hover:text-emerald-600 transition-colors flex items-center gap-1.5 py-1 whitespace-nowrap">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse flex-shrink-0"></span> Failover Demo
@@ -2325,6 +2387,487 @@
   </section>
 
   <!-- ========================================================================= -->
+  <!-- POPULAR CONFIGURATION GUIDES & KNOWLEDGE HUB (SEO POWERHOUSE)             -->
+  <!-- ========================================================================= -->
+  <section id="setup-guides" class="py-12 sm:py-16 px-4 sm:px-6 relative bg-[#F8FAFC] border-t border-[#E2E8F0]">
+    <div class="max-w-7xl mx-auto space-y-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto space-y-3">
+        <span class="badge-ref-blue font-mono text-xs font-bold uppercase tracking-wider">
+          CONFIGURATION KNOWLEDGE BASE &amp; TROUBLESHOOTING DIRECTORY
+        </span>
+        <h2 class="text-3xl sm:text-4xl md:text-[2.5rem] font-black text-[#001737] tracking-tight leading-tight">
+          Common Router, Switch &amp; Firewall Configuration Solutions
+        </h2>
+        <p class="text-sm sm:text-base text-[#475569]">
+          Step-by-step resolution blueprints for complex networking problems. Don't want to risk network downtime? Hire a certified engineer to configure it live on your screen via UltraViewer. Pay only after testing.
+        </p>
+      </div>
+
+      <!-- Category Filter Tabs -->
+      <div class="flex items-center justify-center flex-wrap gap-2 pt-2">
+        <button type="button" class="guide-tab-btn active px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#005CE6] text-white transition-all shadow-sm" data-filter="all">All Setup Guides</button>
+        <button type="button" class="guide-tab-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white text-[#475569] border border-[#E2E8F0] hover:border-[#005CE6] hover:text-[#005CE6] transition-all" data-filter="mikrotik">🌐 MikroTik RouterOS</button>
+        <button type="button" class="guide-tab-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white text-[#475569] border border-[#E2E8F0] hover:border-[#005CE6] hover:text-[#005CE6] transition-all" data-filter="unifi">📡 Ubiquiti UniFi</button>
+        <button type="button" class="guide-tab-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white text-[#475569] border border-[#E2E8F0] hover:border-[#005CE6] hover:text-[#005CE6] transition-all" data-filter="cisco">⚡ Cisco Switches</button>
+        <button type="button" class="guide-tab-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white text-[#475569] border border-[#E2E8F0] hover:border-[#005CE6] hover:text-[#005CE6] transition-all" data-filter="firewalls">🛡️ Firewalls</button>
+        <button type="button" class="guide-tab-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white text-[#475569] border border-[#E2E8F0] hover:border-[#005CE6] hover:text-[#005CE6] transition-all" data-filter="cctv-nas">📹 CCTV &amp; NAS</button>
+      </div>
+
+      <!-- 12 SEO Knowledge Base Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-4">
+        
+        <!-- Guide 1: MikroTik PCC Dual-WAN -->
+        <article class="guide-card" data-category="mikrotik">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="badge-ref-blue text-[10px] font-mono font-bold">MikroTik RouterOS v7</span>
+              <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">0s Failover</span>
+            </div>
+            <h3 class="text-lg font-black text-[#001737] hover:text-[#005CE6] transition-colors leading-snug">
+              MikroTik PCC Dual-WAN Load Balancing (Airtel + Jio) &amp; 0-Second Failover
+            </h3>
+            <p class="text-xs text-[#475569] leading-relaxed">
+              Eliminate internet drops by combining Airtel Fibernet and JioFiber into one unified high-speed pipe with session-stickiness for banking and Zoom.
+            </p>
+            <div class="space-y-1.5 pt-2 text-xs text-slate-600 border-t border-[#F1F5F9]">
+              <div class="font-bold text-[#001737] text-[11px] uppercase tracking-wider">Configuration Blueprint:</div>
+              <div class="flex items-start gap-1.5">
+                <span class="text-[#005CE6] font-bold">1.</span> <span>Mangle Prerouting: Both-Addresses Hash PCC (2/0 &amp; 2/1)</span>
+              </div>
+              <div class="flex items-start gap-1.5">
+                <span class="text-[#005CE6] font-bold">2.</span> <span>Recursive Routing Check: 8.8.8.8 &amp; 1.1.1.1 ping target</span>
+              </div>
+              <div class="flex items-start gap-1.5">
+                <span class="text-[#005CE6] font-bold">3.</span> <span>FastTrack Exception: Preserves connection marks</span>
+              </div>
+            </div>
+          </div>
+          <div class="pt-4 mt-4 border-t border-[#E2E8F0] flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-slate-400 font-mono uppercase block">Remote Setup</span>
+              <span class="font-black text-[#001737] font-mono text-base">₹1,299 <span class="text-[10px] text-slate-400 font-normal">($16)</span></span>
+            </div>
+            <a href="#" class="whatsapp-link btn-bluehost-primary px-3.5 py-1.5 text-xs font-bold rounded-lg" data-context="MikroTik PCC Dual-WAN Setup">
+              <span>Book Setup &rsaquo;</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Guide 2: MikroTik WireGuard Mesh -->
+        <article class="guide-card" data-category="mikrotik">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="badge-ref-blue text-[10px] font-mono font-bold">WireGuard VPN</span>
+              <span class="text-xs font-bold text-[#005CE6] bg-[#005CE6]/10 px-2 py-0.5 rounded-full border border-[#005CE6]/20">Branch Mesh</span>
+            </div>
+            <h3 class="text-lg font-black text-[#001737] hover:text-[#005CE6] transition-colors leading-snug">
+              MikroTik WireGuard Site-to-Site VPN &amp; Remote Worker Mesh
+            </h3>
+            <p class="text-xs text-[#475569] leading-relaxed">
+              Connect multiple offices, branch warehouses, and remote employees directly into the head office LAN with low latency and modern cryptographic security.
+            </p>
+            <div class="space-y-1.5 pt-2 text-xs text-slate-600 border-t border-[#F1F5F9]">
+              <div class="font-bold text-[#001737] text-[11px] uppercase tracking-wider">Configuration Blueprint:</div>
+              <div class="flex items-start gap-1.5">
+                <span class="text-[#005CE6] font-bold">1.</span> <span>WireGuard Interface: Keypair generation &amp; /30 tunnel IPs</span>
+              </div>
+              <div class="flex items-start gap-1.5">
+                <span class="text-[#005CE6] font-bold">2.</span> <span>Peer Routing: Allowed-IPs setup with persistent keepalive</span>
+              </div>
+              <div class="flex items-start gap-1.5">
+                <span class="text-[#005CE6] font-bold">3.</span> <span>IP Route: Subnet gateway routes across the encrypted tunnel</span>
+              </div>
+            </div>
+          </div>
+          <div class="pt-4 mt-4 border-t border-[#E2E8F0] flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-slate-400 font-mono uppercase block">Remote Setup</span>
+              <span class="font-black text-[#001737] font-mono text-base">₹999 <span class="text-[10px] text-slate-400 font-normal">($12)</span></span>
+            </div>
+            <a href="#" class="whatsapp-link btn-bluehost-primary px-3.5 py-1.5 text-xs font-bold rounded-lg" data-context="MikroTik WireGuard VPN Setup">
+              <span>Book Setup &rsaquo;</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Guide 3: MikroTik Bandwidth Queue -->
+        <article class="guide-card" data-category="mikrotik">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="badge-ref-blue text-[10px] font-mono font-bold">QoS &amp; Queue Tree</span>
+              <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200">Zero Lag</span>
+            </div>
+            <h3 class="text-lg font-black text-[#001737] hover:text-[#005CE6] transition-colors leading-snug">
+              MikroTik PCQ Bandwidth Management &amp; Anti-Bufferbloat Gaming QoS
+            </h3>
+            <p class="text-xs text-[#475569] leading-relaxed">
+              Prevent single downloads or 4K streams from choking the office or home network. Equal-share bandwidth distribution with VoIP/Gaming priority.
+            </p>
+            <div class="space-y-1.5 pt-2 text-xs text-slate-600 border-t border-[#F1F5F9]">
+              <div class="font-bold text-[#001737] text-[11px] uppercase tracking-wider">Configuration Blueprint:</div>
+              <div class="flex items-start gap-1.5">
+                <span class="text-[#005CE6] font-bold">1.</span> <span>Queue Types: PCQ download and upload rate limiting</span>
+              </div>
+              <div class="flex items-start gap-1.5">
+                <span class="text-[#005CE6] font-bold">2.</span> <span>Packet Marking: Differentiate Zoom/SIP from Bulk downloads</span>
+              </div>
+              <div class="flex items-start gap-1.5">
+                <span class="text-[#005CE6] font-bold">3.</span> <span>Queue Tree Hierarchy: Parent queues with guaranteed burst</span>
+              </div>
+            </div>
+          </div>
+          <div class="pt-4 mt-4 border-t border-[#E2E8F0] flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-slate-400 font-mono uppercase block">Remote Setup</span>
+              <span class="font-black text-[#001737] font-mono text-base">₹899 <span class="text-[10px] text-slate-400 font-normal">($11)</span></span>
+            </div>
+            <a href="#" class="whatsapp-link btn-bluehost-primary px-3.5 py-1.5 text-xs font-bold rounded-lg" data-context="MikroTik Queue Bandwidth Setup">
+              <span>Book Setup &rsaquo;</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Guide 4: UniFi UDM-Pro Multi-VLAN -->
+        <article class="guide-card" data-category="unifi">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="badge-ref-blue text-[10px] font-mono font-bold">UniFi OS Network</span>
+              <span class="text-xs font-bold text-[#005CE6] bg-[#005CE6]/10 px-2 py-0.5 rounded-full border border-[#005CE6]/20">Multi-VLAN</span>
+            </div>
+            <h3 class="text-lg font-black text-[#001737] hover:text-[#005CE6] transition-colors leading-snug">
+              UniFi UDM-Pro / SE Multi-VLAN Network Segregation &amp; Guest Portal
+            </h3>
+            <p class="text-xs text-[#475569] leading-relaxed">
+              Isolate staff computers, accounting PCs, CCTV NVRs, and guest Wi-Fi into isolated subnets with custom captive portal and firewall blocks.
+            </p>
+            <div class="space-y-1.5 pt-2 text-xs text-slate-600 border-t border-[#F1F5F9]">
+              <div class="font-bold text-[#001737] text-[11px] uppercase tracking-wider">Configuration Blueprint:</div>
+              <div class="flex items-start gap-1.5">
+                <span class="text-[#005CE6] font-bold">1.</span> <span>Virtual Networks: VLAN 10 (Corp), VLAN 20 (Guest), VLAN 30 (IoT)</span>
+              </div>
+              <div class="flex items-start gap-1.5">
+                <span class="text-[#005CE6] font-bold">2.</span> <span>Traffic Rules: Block Inter-VLAN routing with mDNS bridge</span>
+              </div>
+              <div class="flex items-start gap-1.5">
+                <span class="text-[#005CE6] font-bold">3.</span> <span>Guest Hotspot: Terms of service, speed limits &amp; voucher setup</span>
+              </div>
+            </div>
+          </div>
+          <div class="pt-4 mt-4 border-t border-[#E2E8F0] flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-slate-400 font-mono uppercase block">Remote Setup</span>
+              <span class="font-black text-[#001737] font-mono text-base">₹1,999 <span class="text-[10px] text-slate-400 font-normal">($24)</span></span>
+            </div>
+            <a href="#" class="whatsapp-link btn-bluehost-primary px-3.5 py-1.5 text-xs font-bold rounded-lg" data-context="UniFi Multi-VLAN Setup">
+              <span>Book Setup &rsaquo;</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Guide 5: UniFi 802.11r Wi-Fi 6 -->
+        <article class="guide-card" data-category="unifi">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="badge-ref-blue text-[10px] font-mono font-bold">UniFi Wi-Fi 6</span>
+              <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">Fast Roaming</span>
+            </div>
+            <h3 class="text-lg font-black text-[#001737] hover:text-[#005CE6] transition-colors leading-snug">
+              UniFi 802.11r Fast Roaming, RF Channels &amp; Zero Dead Zone Tuning
+            </h3>
+            <p class="text-xs text-[#475569] leading-relaxed">
+              Fine-tune UniFi U6-Pro / U6-Mesh / U7 APs across multi-story buildings so mobile devices roam seamlessly between access points without audio drops.
+            </p>
+            <div class="space-y-1.5 pt-2 text-xs text-slate-600 border-t border-[#F1F5F9]">
+              <div class="font-bold text-[#001737] text-[11px] uppercase tracking-wider">Configuration Blueprint:</div>
+              <div class="flex items-start gap-1.5">
+                <span class="text-[#005CE6] font-bold">1.</span> <span>Minimum RSSI: Kick sticky clients below -72dBm threshold</span>
+              </div>
+              <div class="flex items-start gap-1.5">
+                <span class="text-[#005CE6] font-bold">2.</span> <span>RF Channel Plan: Non-overlapping 1/6/11 on 2.4G &amp; 80MHz on 5G</span>
+              </div>
+              <div class="flex items-start gap-1.5">
+                <span class="text-[#005CE6] font-bold">3.</span> <span>BSS Transition: 802.11k/v/r standards activation</span>
+              </div>
+            </div>
+          </div>
+          <div class="pt-4 mt-4 border-t border-[#E2E8F0] flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-slate-400 font-mono uppercase block">Remote Setup</span>
+              <span class="font-black text-[#001737] font-mono text-base">₹699 <span class="text-[10px] text-slate-400 font-normal">($9)</span></span>
+            </div>
+            <a href="#" class="whatsapp-link btn-bluehost-primary px-3.5 py-1.5 text-xs font-bold rounded-lg" data-context="UniFi Fast Roaming Tuning">
+              <span>Book Setup &rsaquo;</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Guide 6: Cisco 2960 / CBS Trunk & SVI -->
+        <article class="guide-card" data-category="cisco">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="badge-ref-blue text-[10px] font-mono font-bold">Cisco IOS CLI</span>
+              <span class="text-xs font-bold text-[#001737] bg-slate-100 px-2 py-0.5 rounded-full border border-slate-200">802.1Q Trunk</span>
+            </div>
+            <h3 class="text-lg font-black text-[#001737] hover:text-[#005CE6] transition-colors leading-snug">
+              Cisco Catalyst 2960 / CBS Switch 802.1Q Trunk &amp; SVI Routing
+            </h3>
+            <p class="text-xs text-[#475569] leading-relaxed">
+              Deploy managed enterprise switches with native VLAN tagging, Inter-VLAN routing (SVI), and loop protection across distribution networks.
+            </p>
+            <div class="space-y-1.5 pt-2 text-xs text-slate-600 border-t border-[#F1F5F9]">
+              <div class="font-bold text-[#001737] text-[11px] uppercase tracking-wider">Configuration Blueprint:</div>
+              <div class="flex items-start gap-1.5">
+                <span class="text-[#005CE6] font-bold">1.</span> <span>Trunk Setup: `switchport mode trunk` &amp; allowed vlan lists</span>
+              </div>
+              <div class="flex items-start gap-1.5">
+                <span class="text-[#005CE6] font-bold">2.</span> <span>SVI Routing: `interface VlanX` IP addressing &amp; `ip routing`</span>
+              </div>
+              <div class="flex items-start gap-1.5">
+                <span class="text-[#005CE6] font-bold">3.</span> <span>Loop Guard: `spanning-tree portfast bpduguard default`</span>
+              </div>
+            </div>
+          </div>
+          <div class="pt-4 mt-4 border-t border-[#E2E8F0] flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-slate-400 font-mono uppercase block">Remote Setup</span>
+              <span class="font-black text-[#001737] font-mono text-base">₹899 <span class="text-[10px] text-slate-400 font-normal">($11)</span></span>
+            </div>
+            <a href="#" class="whatsapp-link btn-bluehost-primary px-3.5 py-1.5 text-xs font-bold rounded-lg" data-context="Cisco Switch VLAN Setup">
+              <span>Book Setup &rsaquo;</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Guide 7: Cisco LACP Port-Channel -->
+        <article class="guide-card" data-category="cisco">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="badge-ref-blue text-[10px] font-mono font-bold">EtherChannel</span>
+              <span class="text-xs font-bold text-[#005CE6] bg-[#005CE6]/10 px-2 py-0.5 rounded-full border border-[#005CE6]/20">2G / 4G Bond</span>
+            </div>
+            <h3 class="text-lg font-black text-[#001737] hover:text-[#005CE6] transition-colors leading-snug">
+              Cisco LACP Port-Channel (802.3ad) Bandwidth Bonding &amp; Link Redundancy
+            </h3>
+            <p class="text-xs text-[#475569] leading-relaxed">
+              Aggregate multiple physical Gigabit or 10G links into a single high-throughput trunk between core switches, servers, and NAS storage.
+            </p>
+            <div class="space-y-1.5 pt-2 text-xs text-slate-600 border-t border-[#F1F5F9]">
+              <div class="font-bold text-[#001737] text-[11px] uppercase tracking-wider">Configuration Blueprint:</div>
+              <div class="flex items-start gap-1.5">
+                <span class="text-[#005CE6] font-bold">1.</span> <span>Channel Group: `channel-group 1 mode active` LACP protocol</span>
+              </div>
+              <div class="flex items-start gap-1.5">
+                <span class="text-[#005CE6] font-bold">2.</span> <span>Port-Channel Interface: Trunk encapsulation &amp; allowed VLANs</span>
+              </div>
+              <div class="flex items-start gap-1.5">
+                <span class="text-[#005CE6] font-bold">3.</span> <span>Load Distribution: `port-channel load-balance src-dst-ip`</span>
+              </div>
+            </div>
+          </div>
+          <div class="pt-4 mt-4 border-t border-[#E2E8F0] flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-slate-400 font-mono uppercase block">Remote Setup</span>
+              <span class="font-black text-[#001737] font-mono text-base">₹799 <span class="text-[10px] text-slate-400 font-normal">($10)</span></span>
+            </div>
+            <a href="#" class="whatsapp-link btn-bluehost-primary px-3.5 py-1.5 text-xs font-bold rounded-lg" data-context="Cisco LACP EtherChannel Setup">
+              <span>Book Setup &rsaquo;</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Guide 8: SonicWall Port Forward & Hairpin NAT -->
+        <article class="guide-card" data-category="firewalls">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="badge-ref-orange text-[10px] font-mono font-bold">SonicWall SonicOS</span>
+              <span class="text-xs font-bold text-rose-600 bg-rose-50 px-2 py-0.5 rounded-full border border-rose-200">Hairpin NAT</span>
+            </div>
+            <h3 class="text-lg font-black text-[#001737] hover:text-[#005CE6] transition-colors leading-snug">
+              SonicWall TZ Port Forwarding (NAT), Hairpin NAT &amp; NetExtender VPN
+            </h3>
+            <p class="text-xs text-[#475569] leading-relaxed">
+              Safely publish local web servers, RDP gateways, or CCTV recorders to the internet, enable loopback internal access, and deploy SSL-VPN.
+            </p>
+            <div class="space-y-1.5 pt-2 text-xs text-slate-600 border-t border-[#F1F5F9]">
+              <div class="font-bold text-[#001737] text-[11px] uppercase tracking-wider">Configuration Blueprint:</div>
+              <div class="flex items-start gap-1.5">
+                <span class="text-[#005CE6] font-bold">1.</span> <span>Inbound NAT Policy: WAN IP to Translated Internal Host</span>
+              </div>
+              <div class="flex items-start gap-1.5">
+                <span class="text-[#005CE6] font-bold">2.</span> <span>Hairpin/Loopback NAT: Resolves public IP from inside the LAN</span>
+              </div>
+              <div class="flex items-start gap-1.5">
+                <span class="text-[#005CE6] font-bold">3.</span> <span>NetExtender SSL-VPN: User client routes &amp; IP address pool</span>
+              </div>
+            </div>
+          </div>
+          <div class="pt-4 mt-4 border-t border-[#E2E8F0] flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-slate-400 font-mono uppercase block">Remote Setup</span>
+              <span class="font-black text-[#001737] font-mono text-base">₹1,499 <span class="text-[10px] text-slate-400 font-normal">($18)</span></span>
+            </div>
+            <a href="#" class="whatsapp-link btn-bluehost-primary px-3.5 py-1.5 text-xs font-bold rounded-lg" data-context="SonicWall Firewall Setup">
+              <span>Book Setup &rsaquo;</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Guide 9: Fortinet SD-WAN & SSL VPN -->
+        <article class="guide-card" data-category="firewalls">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="badge-ref-orange text-[10px] font-mono font-bold">Fortinet FortiOS</span>
+              <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">SD-WAN Rules</span>
+            </div>
+            <h3 class="text-lg font-black text-[#001737] hover:text-[#005CE6] transition-colors leading-snug">
+              Fortinet FortiGate Dual-WAN SD-WAN Balancing &amp; Remote SSL VPN
+            </h3>
+            <p class="text-xs text-[#475569] leading-relaxed">
+              Configure enterprise FortiGate next-gen firewalls with automated latency/jitter-based SD-WAN steering and secure FortiClient VPN tunnels.
+            </p>
+            <div class="space-y-1.5 pt-2 text-xs text-slate-600 border-t border-[#F1F5F9]">
+              <div class="font-bold text-[#001737] text-[11px] uppercase tracking-wider">Configuration Blueprint:</div>
+              <div class="flex items-start gap-1.5">
+                <span class="text-[#005CE6] font-bold">1.</span> <span>SD-WAN Zone: Bundling WAN1 and WAN2 interfaces</span>
+              </div>
+              <div class="flex items-start gap-1.5">
+                <span class="text-[#005CE6] font-bold">2.</span> <span>Performance SLA: Health-check ping targeting 8.8.8.8</span>
+              </div>
+              <div class="flex items-start gap-1.5">
+                <span class="text-[#005CE6] font-bold">3.</span> <span>FortiClient Portal: Full-tunnel SSL VPN with MFA policies</span>
+              </div>
+            </div>
+          </div>
+          <div class="pt-4 mt-4 border-t border-[#E2E8F0] flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-slate-400 font-mono uppercase block">Remote Setup</span>
+              <span class="font-black text-[#001737] font-mono text-base">₹1,499 <span class="text-[10px] text-slate-400 font-normal">($18)</span></span>
+            </div>
+            <a href="#" class="whatsapp-link btn-bluehost-primary px-3.5 py-1.5 text-xs font-bold rounded-lg" data-context="Fortinet FortiGate Setup">
+              <span>Book Setup &rsaquo;</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Guide 10: pfSense / OPNsense Multi-WAN -->
+        <article class="guide-card" data-category="firewalls">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="badge-ref-orange text-[10px] font-mono font-bold">pfSense Netgate</span>
+              <span class="text-xs font-bold text-[#005CE6] bg-[#005CE6]/10 px-2 py-0.5 rounded-full border border-[#005CE6]/20">Gateway Group</span>
+            </div>
+            <h3 class="text-lg font-black text-[#001737] hover:text-[#005CE6] transition-colors leading-snug">
+              pfSense &amp; OPNsense Multi-WAN Gateway Groups &amp; WireGuard Tunnels
+            </h3>
+            <p class="text-xs text-[#475569] leading-relaxed">
+              Open-source enterprise firewall deployment with redundant ISP Tier 1 / Tier 2 failover, Unbound DNS caching, and WireGuard site connections.
+            </p>
+            <div class="space-y-1.5 pt-2 text-xs text-slate-600 border-t border-[#F1F5F9]">
+              <div class="font-bold text-[#001737] text-[11px] uppercase tracking-wider">Configuration Blueprint:</div>
+              <div class="flex items-start gap-1.5">
+                <span class="text-[#005CE6] font-bold">1.</span> <span>Gateway Group: Tier 1 (Primary) and Tier 2 (Secondary) failover</span>
+              </div>
+              <div class="flex items-start gap-1.5">
+                <span class="text-[#005CE6] font-bold">2.</span> <span>Firewall Rules: Route LAN traffic through Gateway Group</span>
+              </div>
+              <div class="flex items-start gap-1.5">
+                <span class="text-[#005CE6] font-bold">3.</span> <span>DNS Resolver: Transparent query forwarding with DoH encryption</span>
+              </div>
+            </div>
+          </div>
+          <div class="pt-4 mt-4 border-t border-[#E2E8F0] flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-slate-400 font-mono uppercase block">Remote Setup</span>
+              <span class="font-black text-[#001737] font-mono text-base">₹1,299 <span class="text-[10px] text-slate-400 font-normal">($16)</span></span>
+            </div>
+            <a href="#" class="whatsapp-link btn-bluehost-primary px-3.5 py-1.5 text-xs font-bold rounded-lg" data-context="pfSense Multi-WAN Setup">
+              <span>Book Setup &rsaquo;</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Guide 11: CCTV NVR Remote Access -->
+        <article class="guide-card" data-category="cctv-nas">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="badge-ref-blue text-[10px] font-mono font-bold">Hikvision &amp; Dahua</span>
+              <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">No Static IP</span>
+            </div>
+            <h3 class="text-lg font-black text-[#001737] hover:text-[#005CE6] transition-colors leading-snug">
+              CCTV NVR Remote Mobile Viewing Setup (No Static IP Needed)
+            </h3>
+            <p class="text-xs text-[#475569] leading-relaxed">
+              Connect Hikvision, Dahua, CP Plus, or Uniview surveillance NVRs/DVRs for remote mobile viewing without paying for expensive ISP static IPs.
+            </p>
+            <div class="space-y-1.5 pt-2 text-xs text-slate-600 border-t border-[#F1F5F9]">
+              <div class="font-bold text-[#001737] text-[11px] uppercase tracking-wider">Configuration Blueprint:</div>
+              <div class="flex items-start gap-1.5">
+                <span class="text-[#005CE6] font-bold">1.</span> <span>Static LAN IP: Lock NVR MAC address outside DHCP pool</span>
+              </div>
+              <div class="flex items-start gap-1.5">
+                <span class="text-[#005CE6] font-bold">2.</span> <span>Cloud P2P Bridge: Hik-Connect / DMSS server verification</span>
+              </div>
+              <div class="flex items-start gap-1.5">
+                <span class="text-[#005CE6] font-bold">3.</span> <span>Camera Subnet Isolation: Prevents unauthorized internet access</span>
+              </div>
+            </div>
+          </div>
+          <div class="pt-4 mt-4 border-t border-[#E2E8F0] flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-slate-400 font-mono uppercase block">Remote Setup</span>
+              <span class="font-black text-[#001737] font-mono text-base">₹699 <span class="text-[10px] text-slate-400 font-normal">($9)</span></span>
+            </div>
+            <a href="#" class="whatsapp-link btn-bluehost-primary px-3.5 py-1.5 text-xs font-bold rounded-lg" data-context="CCTV NVR Remote Setup">
+              <span>Book Setup &rsaquo;</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Guide 12: Synology NAS WireGuard -->
+        <article class="guide-card" data-category="cctv-nas">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="badge-ref-blue text-[10px] font-mono font-bold">Synology DSM</span>
+              <span class="text-xs font-bold text-[#005CE6] bg-[#005CE6]/10 px-2 py-0.5 rounded-full border border-[#005CE6]/20">Private Cloud</span>
+            </div>
+            <h3 class="text-lg font-black text-[#001737] hover:text-[#005CE6] transition-colors leading-snug">
+              Synology NAS Storage Remote File Access &amp; WireGuard Private Tunnel
+            </h3>
+            <p class="text-xs text-[#475569] leading-relaxed">
+              Mount office network drives (SMB/AFP) remotely at full broadband speeds without exposing your storage directly to internet ransomware scanners.
+            </p>
+            <div class="space-y-1.5 pt-2 text-xs text-slate-600 border-t border-[#F1F5F9]">
+              <div class="font-bold text-[#001737] text-[11px] uppercase tracking-wider">Configuration Blueprint:</div>
+              <div class="flex items-start gap-1.5">
+                <span class="text-[#005CE6] font-bold">1.</span> <span>Secure VPN Tunnel: WireGuard or OpenVPN on router/NAS</span>
+              </div>
+              <div class="flex items-start gap-1.5">
+                <span class="text-[#005CE6] font-bold">2.</span> <span>Close Insecure Ports: Disable dangerous open port 5000/5001</span>
+              </div>
+              <div class="flex items-start gap-1.5">
+                <span class="text-[#005CE6] font-bold">3.</span> <span>Client Drive Mapping: Automated SMB mounting over tunnel</span>
+              </div>
+            </div>
+          </div>
+          <div class="pt-4 mt-4 border-t border-[#E2E8F0] flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-slate-400 font-mono uppercase block">Remote Setup</span>
+              <span class="font-black text-[#001737] font-mono text-base">₹799 <span class="text-[10px] text-slate-400 font-normal">($10)</span></span>
+            </div>
+            <a href="#" class="whatsapp-link btn-bluehost-primary px-3.5 py-1.5 text-xs font-bold rounded-lg" data-context="Synology NAS Remote Setup">
+              <span>Book Setup &rsaquo;</span>
+            </a>
+          </div>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
   <!-- SECTION 7: FAQ ACCORDION                                                  -->
   <!-- ========================================================================= -->
   <section id="faq" class="py-10 sm:py-12 px-4 sm:px-6 relative bg-[#FFFFFF] border-t border-[#E2E8F0]">
@@ -2783,6 +3326,6 @@
   </div>
 
   <!-- Main JavaScript File -->
-  <script src="js/main.js?v=2.2"></script>
+  <script src="js/main.js?v=2.3"></script>
 </body>
 </html>

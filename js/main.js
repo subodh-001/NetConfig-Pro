@@ -68,6 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupContactForm();
   setupFailoverSimulator();
   setupGuideModal();
+  setupGuideTabs();
   updateWhatsAppLinks();
 });
 
@@ -152,6 +153,8 @@ function setupHeroSearch() {
       targetId = 'contact';
     } else if (q.includes('faq') || q.includes('question') || q.includes('ultraviewer') || q.includes('anydesk')) {
       targetId = 'faq';
+    } else if (q.includes('guide') || q.includes('solution') || q.includes('how to') || q.includes('troubleshoot') || q.includes('step') || q.includes('blueprint')) {
+      targetId = 'setup-guides';
     } else {
       targetId = 'switches';
     }
@@ -769,8 +772,12 @@ function updateWhatsAppLinks() {
   const defaultUrl = `https://wa.me/${CONFIG.whatsappNumber}?text=${defaultMessage}`;
 
   document.querySelectorAll('.whatsapp-link').forEach(link => {
+    const contextAttr = link.getAttribute('data-context');
     const btnText = link.textContent.trim();
-    if (btnText && (btnText.toLowerCase().includes('configure') || btnText.toLowerCase().includes('tune') || btnText.toLowerCase().includes('setup'))) {
+    if (contextAttr) {
+      const specificMsg = encodeURIComponent(`Hello Network Engineer! 👋\n\nI found your website and need urgent help with: *${contextAttr}*.\nCould you please connect via UltraViewer or AnyDesk? Thank you!`);
+      link.setAttribute('href', `https://wa.me/${CONFIG.whatsappNumber}?text=${specificMsg}`);
+    } else if (btnText && (btnText.toLowerCase().includes('configure') || btnText.toLowerCase().includes('tune') || btnText.toLowerCase().includes('setup'))) {
       const cleanName = btnText.replace(/Configure\s*|Tune\s*|Setup\s*/gi, '').trim();
       const specificMsg = encodeURIComponent(`Hello Network Engineer! 👋\n\nI found your website and want to configure my: *${cleanName}*.\nCould you please let me know your earliest availability and connect via UltraViewer or AnyDesk? Thank you!`);
       link.setAttribute('href', `https://wa.me/${CONFIG.whatsappNumber}?text=${specificMsg}`);
@@ -936,4 +943,44 @@ function setupGuideModal() {
       closeModal();
     }
   });
+}
+
+// ==========================================
+// KNOWLEDGE HUB / CONFIGURATION GUIDE TABS
+// ==========================================
+function setupGuideTabs() {
+  const tabBtns = document.querySelectorAll('.guide-tab-btn');
+  const cards = document.querySelectorAll('.guide-card');
+
+  if (!tabBtns.length || !cards.length) return;
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.getAttribute('data-filter');
+
+      tabBtns.forEach(b => {
+        b.classList.remove('active', 'bg-[#005CE6]', 'text-white', 'shadow-sm');
+        b.classList.add('bg-white', 'text-[#475569]', 'border', 'border-[#E2E8F0]');
+      });
+      btn.classList.add('active', 'bg-[#005CE6]', 'text-white', 'shadow-sm');
+      btn.classList.remove('bg-white', 'text-[#475569]', 'border', 'border-[#E2E8F0]');
+
+      cards.forEach(card => {
+        const cat = card.getAttribute('data-category');
+        if (filter === 'all' || cat === filter) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+}
+
+// Auto-align canonical URL to current live origin on production domains
+if (typeof window !== 'undefined' && window.location.hostname && !window.location.hostname.includes('localhost') && !window.location.hostname.includes('127.0.0.1')) {
+  const canonicalTag = document.querySelector('link[rel="canonical"]');
+  if (canonicalTag) {
+    canonicalTag.href = window.location.origin + window.location.pathname;
+  }
 }

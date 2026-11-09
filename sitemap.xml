@@ -1,57 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <!-- Live Production Host: netconfig.alwaystherevault.com -->
+  <url>
+    <loc>https://netconfig.alwaystherevault.com/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://cdn.mikrotik.com/web-assets/rb_images/2065_lg.webp</image:loc>
+      <image:title>MikroTik RB5009 Core Router Configuration</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://netconfig.alwaystherevault.com/#mikrotik</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://netconfig.alwaystherevault.com/#unifi</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://netconfig.alwaystherevault.com/#switches</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://netconfig.alwaystherevault.com/#setup-guides</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://netconfig.alwaystherevault.com/#how-it-works</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://netconfig.alwaystherevault.com/#failover-demo</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://netconfig.alwaystherevault.com/#pricing</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://netconfig.alwaystherevault.com/#calculator</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://netconfig.alwaystherevault.com/#faq</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://netconfig.alwaystherevault.com/#contact</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- Canonical Brand Host: netconfigpro.com -->
   <url>
     <loc>https://netconfigpro.com/</loc>
-    <lastmod>2026-11-09</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://netconfigpro.com/#setup-guides</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
     <loc>https://netconfigpro.com/#mikrotik</loc>
-    <lastmod>2026-11-09</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
     <loc>https://netconfigpro.com/#unifi</loc>
-    <lastmod>2026-11-09</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
     <loc>https://netconfigpro.com/#switches</loc>
-    <lastmod>2026-11-09</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
-  </url>
-  <url>
-    <loc>https://netconfigpro.com/#failover-demo</loc>
-    <lastmod>2026-11-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://netconfigpro.com/#pricing</loc>
-    <lastmod>2026-11-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
-  </url>
-  <url>
-    <loc>https://netconfigpro.com/#calculator</loc>
-    <lastmod>2026-11-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://netconfigpro.com/#faq</loc>
-    <lastmod>2026-11-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://netconfigpro.com/#contact</loc>
-    <lastmod>2026-11-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
+    <priority>0.95</priority>
   </url>
 </urlset>
