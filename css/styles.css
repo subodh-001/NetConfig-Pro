@@ -1,0 +1,390 @@
+/* ==========================================================================
+   NetConfig Pro - Custom Palette (#FFFFFF, #F7F7F7, #3A9FDF, #0B283D)
+   Maid For Atlanta / Clean Azure & Slate Navy Architecture
+   Enhanced Typography & Design Scale
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  /* User Reference Palette (#FFFFFF, #F7F7F7, #3A9FDF, #0B283D) */
+  --bg-canvas: #FFFFFF;
+  --bg-surface: #F7F7F7;
+  --bg-card: #FFFFFF;
+  
+  --color-border: #E5E7EB;
+  --color-primary: #3A9FDF;       /* Clean Azure / Sky Blue (Primary CTA, Buttons, Badges) */
+  --color-primary-hover: #2788C4; /* Darker Azure Blue on hover */
+  --color-navy: #0B283D;          /* Deep Slate Navy (Headings, Banner, Dark Sections, Footer) */
+  --color-navy-dark: #071C2B;     /* Ultra Deep Navy */
+  --color-navy-card: #12354E;     /* Dark Card Surface inside dark sections */
+  --color-slate: #5A6878;         /* High-readability secondary/body text */
+  --color-muted: #8E9BAA;         /* Muted caption text */
+  
+  --text-dark: #0B283D;
+  --text-body: #5A6878;
+  --text-muted: #8E9BAA;
+  
+  --border-card: #E5E7EB;
+  --border-focus: #3A9FDF;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-sans);
+  background-color: var(--bg-canvas);
+  color: var(--text-dark);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  overflow-x: hidden;
+  font-size: 1rem;
+  line-height: 1.65;
+  background-color: var(--bg-canvas);
+  color: var(--text-dark);
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+}
+
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: -0.025em;
+  font-weight: 800;
+  color: var(--color-navy);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F7F7F7;
+}
+::-webkit-scrollbar-thumb {
+  background: #D1D5DB;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3A9FDF;
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* ==========================================================================
+   Clean Card Components (#FFFFFF, #F7F7F7, #3A9FDF, #0B283D)
+   ========================================================================== */
+.ref-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border-card);
+  border-radius: 1.35rem;
+  box-shadow: 0 4px 20px -2px rgba(11, 40, 61, 0.04), 0 2px 6px -1px rgba(11, 40, 61, 0.02);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.ref-card:hover {
+  border-color: rgba(58, 159, 223, 0.5);
+  box-shadow: 0 20px 40px -8px rgba(11, 40, 61, 0.1);
+  transform: translateY(-4px);
+}
+
+/* Reference Corner Floating Badges */
+.floating-corner-badge {
+  position: absolute;
+  bottom: 14px;
+  right: 16px;
+  background: var(--color-primary);
+  color: #FFFFFF;
+  border-radius: 0.875rem;
+  padding: 0.6rem 0.75rem;
+  box-shadow: 0 6px 16px rgba(58, 159, 223, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.floating-corner-badge:hover {
+  transform: scale(1.08);
+  box-shadow: 0 8px 20px rgba(58, 159, 223, 0.5);
+}
+
+.floating-corner-badge-blue {
+  position: absolute;
+  bottom: 14px;
+  right: 16px;
+  background: var(--color-navy);
+  color: #FFFFFF;
+  border-radius: 0.875rem;
+  padding: 0.6rem 0.75rem;
+  box-shadow: 0 6px 16px rgba(11, 40, 61, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.floating-corner-badge-blue:hover {
+  transform: scale(1.08);
+  box-shadow: 0 8px 20px rgba(11, 40, 61, 0.5);
+}
+
+/* Floating Pill Notification Tag (Matching Reference Design) */
+.floating-pill-tag {
+  background: #FFFFFF;
+  border: 1px solid var(--border-card);
+  border-radius: 9999px;
+  box-shadow: 0 10px 25px rgba(11, 40, 61, 0.08);
+  padding: 0.5rem 1.1rem;
+  font-size: 0.825rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+/* Arch Accent Behind Hero Image */
+.hero-arch-accent {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(58, 159, 223, 0.18) 0%, rgba(58, 159, 223, 0.02) 70%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Hardware Image Showcase Frame */
+.hardware-img-wrap {
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-card);
+  padding: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 220px;
+  overflow: hidden;
+  position: relative;
+}
+
+.hardware-img-wrap img {
+  max-height: 180px;
+  max-width: 100%;
+  object-fit: contain;
+  transition: transform 0.35s ease;
+  filter: drop-shadow(0 10px 20px rgba(11, 40, 61, 0.09));
+}
+
+.ref-card:hover .hardware-img-wrap img {
+  transform: scale(1.06);
+}
+
+/* Primary Action Button (Azure Blue CTA) */
+.btn-ref-orange,
+.btn-ref-primary {
+  background: var(--color-primary);
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border-radius: 0.875rem;
+  box-shadow: 0 6px 18px rgba(58, 159, 223, 0.35);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  letter-spacing: -0.01em;
+}
+
+.btn-ref-orange:hover,
+.btn-ref-primary:hover {
+  background: var(--color-primary-hover);
+  box-shadow: 0 10px 26px rgba(58, 159, 223, 0.45);
+  transform: translateY(-2px);
+}
+
+/* Secondary Button (Crisp White with Slate/Border) */
+.btn-ref-royal,
+.btn-ref-secondary {
+  background: #FFFFFF;
+  color: var(--color-navy);
+  font-weight: 700;
+  font-size: 0.95rem;
+  border-radius: 0.875rem;
+  border: 1.5px solid var(--color-border);
+  box-shadow: 0 2px 10px rgba(11, 40, 61, 0.04);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  letter-spacing: -0.01em;
+}
+
+.btn-ref-royal:hover,
+.btn-ref-secondary:hover {
+  background: var(--bg-surface);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  box-shadow: 0 8px 22px rgba(58, 159, 223, 0.14);
+  transform: translateY(-2px);
+}
+
+/* Pill Badges */
+.badge-ref-orange,
+.badge-royal {
+  background: rgba(58, 159, 223, 0.1);
+  color: var(--color-primary);
+  border: 1px solid rgba(58, 159, 223, 0.25);
+  border-radius: 9999px;
+  padding: 0.35rem 0.95rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.badge-ref-blue,
+.badge-navy {
+  background: var(--bg-surface);
+  color: var(--color-navy);
+  border: 1px solid var(--border-card);
+  border-radius: 9999px;
+  padding: 0.35rem 0.95rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+/* Bullet points */
+.ref-bullet {
+  color: var(--color-primary);
+  font-weight: 800;
+  margin-right: 0.6rem;
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
+/* Floating WhatsApp Pill */
+.whatsapp-float {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #25D366;
+  color: #FFFFFF;
+  padding: 14px 24px;
+  border-radius: 9999px;
+  font-weight: 800;
+  font-size: 0.95rem;
+  box-shadow: 0 12px 30px rgba(37, 211, 102, 0.42);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.05) translateY(-2px);
+  box-shadow: 0 16px 36px rgba(37, 211, 102, 0.55);
+}
+
+/* Live Toast */
+.live-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 998;
+  max-width: 380px;
+  background: #FFFFFF;
+  border: 1px solid var(--border-card);
+  border-left: 4px solid var(--color-primary);
+  border-radius: 16px;
+  padding: 14px 18px;
+  box-shadow: 0 16px 36px rgba(11, 40, 61, 0.12);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transform: translateY(130%);
+  opacity: 0;
+  transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.live-toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Tabs */
+.tab-btn.active {
+  background: var(--color-navy);
+  color: #FFFFFF;
+  border-color: var(--color-navy);
+  box-shadow: 0 6px 16px rgba(11, 40, 61, 0.25);
+}
+
+/* Flow Line Animation */
+.flow-line {
+  position: relative;
+  overflow: hidden;
+}
+
+.flow-line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+  animation: data-stream 1.8s infinite linear;
+}
+
+@keyframes data-stream {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Navigation Items & Spacing Polish */
+#mainHeader nav a {
+  position: relative;
+  letter-spacing: -0.01em;
+  padding: 0.45rem 0.5rem;
+  color: var(--color-slate);
+  font-size: 0.925rem;
+  transition: all 0.2s ease;
+  border-radius: 0.5rem;
+}
+
+#mainHeader nav a:hover {
+  color: var(--color-primary);
+  background: rgba(247, 247, 247, 0.9);
+}
+
+@media (max-width: 768px) {
+  .whatsapp-float span {
+    display: none;
+  }
+  .whatsapp-float {
+    padding: 15px;
+    border-radius: 50%;
+  }
+  .live-toast {
+    display: none;
+  }
+}

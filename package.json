@@ -1,0 +1,21 @@
+{
+  "name": "network-engineer-landing-page",
+  "version": "1.0.0",
+  "description": "Professional Network Engineer Landing Page for MikroTik, UniFi, and Switch Configurations",
+  "main": "index.html",
+  "scripts": {
+    "start": "./start.sh",
+    "serve": "./start.sh",
+    "dev": "./start.sh"
+  },
+  "keywords": [
+    "mikrotik",
+    "unifi",
+    "network-engineer",
+    "router-configuration",
+    "ultraviewer"
+  ],
+  "author": "NetConfig Pro",
+  "license": "ISC"
+}
+
