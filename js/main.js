@@ -32,24 +32,58 @@ const currencyRates = {
 // Base costs in INR (Pocket-friendly & transparent rates)
 const basePricing = {
   brands: {
-    mikrotik: { name: 'MikroTik RouterOS', base: 699 },
-    unifi: { name: 'Ubiquiti UniFi Ecosystem', base: 799 },
-    cisco: { name: 'Cisco Switches & Routers', base: 899 },
-    fortinet: { name: 'Fortinet FortiGate Firewall', base: 1499 },
-    sonicwall: { name: 'SonicWall TZ & NSa Firewalls', base: 1499 },
-    sophos: { name: 'Sophos XGS Next-Gen Firewall', base: 1499 },
-    pfsense: { name: 'pfSense / OPNsense Appliance', base: 1299 },
-    tplink: { name: 'TP-Link Omada SDN', base: 599 },
-    other: { name: 'Other Enterprise Router/Switch', base: 599 }
+    mikrotik: { name: 'MikroTik RouterOS (CCR, RB, hAP, hEX)', category: 'router', base: 699, desc: 'Base WAN/LAN, DHCP, NAT, DNS & firewall protection' },
+    unifi: { name: 'Ubiquiti UniFi (UDM, Gateway, USW, U6/U7)', category: 'router', base: 799, desc: 'UniFi Network controller adoption, SSID & routing setup' },
+    cisco: { name: 'Cisco Switches & Routers (Catalyst, SG, CBS)', category: 'switch', base: 899, desc: 'CLI console setup, VLAN trunking, SSH & port hardening' },
+    cctv: { name: 'CCTV NVR / DVR & IP Cameras (Hikvision, Dahua, CP Plus)', category: 'cctv', base: 599, desc: 'NVR network setup, camera IP assignment & phone app' },
+    fortinet: { name: 'Fortinet FortiGate Firewall', category: 'firewall', base: 1499, desc: 'Policy routes, interfaces, NAT & security profiles' },
+    sonicwall: { name: 'SonicWall TZ & NSa Firewalls', category: 'firewall', base: 1499, desc: 'Access rules, NAT policies & interface security zones' },
+    sophos: { name: 'Sophos XGS Next-Gen Firewall', category: 'firewall', base: 1499, desc: 'Firewall rules, NAT policies & SSL inspection setup' },
+    pfsense: { name: 'pfSense / OPNsense Appliance', category: 'firewall', base: 1299, desc: 'WAN/LAN interfaces, gateway routing, DNS & packages' },
+    tplink: { name: 'TP-Link Omada SDN & SafeStream', category: 'router', base: 599, desc: 'Omada Controller or standalone gateway configuration' },
+    other: { name: 'Other Enterprise Router/Switch', category: 'other', base: 599, desc: 'General managed router or switch configuration' }
   },
   addons: {
-    dualWan: { name: 'Dual/Multi-WAN Load Balancing & Failover', price: 599 },
-    vpn: { name: 'Site-to-Site / Remote VPN (WireGuard/IPsec)', price: 499 },
-    vlan: { name: 'VLAN Segmentation & Trunking', price: 399 },
-    qos: { name: 'Bandwidth Limiting & QoS Queue Tree', price: 299 },
-    hotspot: { name: 'Hotspot / Guest Portal & Vouchers', price: 599 },
-    firewall: { name: 'Firewall Hardening & DDoS Filter', price: 399 },
-    wifi: { name: 'Wi-Fi Roaming & RF Channel Tuning', price: 349 }
+    dualWan: { 
+      name: 'Dual-WAN Auto-Failover & Load Balancing', 
+      price: 499, 
+      desc: 'Combine 2 ISPs (Airtel + Jio) — 0-sec auto-failover' 
+    },
+    vpn: { 
+      name: 'Remote VPN / WireGuard Access', 
+      price: 399, 
+      desc: 'Access office Tally, NAS files & servers securely from home' 
+    },
+    vlan: { 
+      name: 'VLAN Segmentation & Network Isolation', 
+      price: 299, 
+      desc: 'Separate Staff, Guest Wi-Fi & CCTV on isolated subnets' 
+    },
+    cctvRemote: { 
+      name: 'CCTV Mobile App & Remote View', 
+      price: 299, 
+      desc: 'Hik-Connect / DMSS / gCMOB phone viewing without static IP' 
+    },
+    qos: { 
+      name: 'Bandwidth Limiting & QoS Speed Limits', 
+      price: 199, 
+      desc: 'Stop torrent hogs; prioritize Zoom, Teams & VoIP calls' 
+    },
+    firewall: { 
+      name: 'Firewall Hardening & Attack Defense', 
+      price: 299, 
+      desc: 'Block brute-force bot attacks, port knocking & DDoS scans' 
+    },
+    hotspot: { 
+      name: 'Guest Wi-Fi Hotspot & Vouchers', 
+      price: 399, 
+      desc: 'Custom splash login page with time or data limit tokens' 
+    },
+    wifi: { 
+      name: 'Wi-Fi Fast Roaming & RF Tuning', 
+      price: 249, 
+      desc: 'Seamless 802.11r/k roaming across rooms without dropped calls' 
+    }
   }
 };
 
@@ -301,45 +335,121 @@ function setupHardwareRotator() {
 }
 
 // ==========================================
-// INTERACTIVE COST CALCULATOR
+// INTERACTIVE COST CALCULATOR & RECEIPT
 // ==========================================
 function setupCalculator() {
   const brandSelect = document.getElementById('calcBrand');
   const urgencySelect = document.getElementById('calcUrgency');
   const currencyToggle = document.getElementById('calcCurrencyToggle');
   const checkboxes = document.querySelectorAll('.calc-addon-check');
+  const breakdownListEl = document.getElementById('calcBreakdownList');
+  const categoryPills = document.querySelectorAll('.calc-cat-pill');
   
   if (!brandSelect) return;
+
+  // Sync category filter pills with brand dropdown
+  categoryPills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      categoryPills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      const cat = pill.dataset.category;
+      
+      // Auto-select representative equipment if a specific category is clicked
+      if (cat === 'router') brandSelect.value = 'mikrotik';
+      else if (cat === 'cctv') brandSelect.value = 'cctv';
+      else if (cat === 'switch') brandSelect.value = 'cisco';
+      else if (cat === 'firewall') brandSelect.value = 'fortinet';
+      
+      recalculate();
+    });
+  });
+
+  // When dropdown changes, update category pill highlight
+  brandSelect.addEventListener('change', () => {
+    const selectedOption = brandSelect.options[brandSelect.selectedIndex];
+    const cat = selectedOption ? selectedOption.dataset.cat : 'all';
+    categoryPills.forEach(p => {
+      if (p.dataset.category === cat) {
+        categoryPills.forEach(btn => btn.classList.remove('active'));
+        p.classList.add('active');
+      }
+    });
+    recalculate();
+  });
+
+  // Feature cards active styling and click handling
+  checkboxes.forEach(cb => {
+    const card = cb.closest('.calc-feature-card');
+    
+    // Toggle active class on change
+    cb.addEventListener('change', () => {
+      if (card) {
+        if (cb.checked) {
+          card.classList.add('calc-card-active');
+        } else {
+          card.classList.remove('calc-card-active');
+        }
+      }
+      recalculate();
+    });
+
+    // Make entire card surface clickable
+    if (card) {
+      card.addEventListener('click', (e) => {
+        if (e.target !== cb && e.target.tagName !== 'INPUT') {
+          e.preventDefault();
+          cb.checked = !cb.checked;
+          cb.dispatchEvent(new Event('change'));
+        }
+      });
+    }
+  });
 
   function recalculate() {
     const selectedBrandKey = brandSelect.value;
     const brandData = basePricing.brands[selectedBrandKey] || basePricing.brands.mikrotik;
-    let totalInr = brandData.base;
+    let baseInr = brandData.base;
+    let addonsTotalInr = 0;
     
-    let selectedAddonNames = [];
+    let selectedAddonItems = [];
 
     checkboxes.forEach(cb => {
+      const card = cb.closest('.calc-feature-card');
       if (cb.checked) {
+        if (card) card.classList.add('calc-card-active');
         const addonKey = cb.dataset.addon;
         const addon = basePricing.addons[addonKey];
         if (addon) {
-          totalInr += addon.price;
-          selectedAddonNames.push(addon.name);
+          addonsTotalInr += addon.price;
+          selectedAddonItems.push(addon);
         }
+      } else {
+        if (card) card.classList.remove('calc-card-active');
       }
     });
 
+    const subtotalInr = baseInr + addonsTotalInr;
+
     // Urgency factor
     const isEmergency = urgencySelect.value === 'emergency';
+    let emergencyFeeInr = 0;
     if (isEmergency) {
-      totalInr = Math.round(totalInr * 1.20); // 20% priority emergency dispatch fee
+      emergencyFeeInr = Math.round(subtotalInr * 0.20); // 20% priority emergency dispatch fee
     }
+
+    const grandTotalInr = subtotalInr + emergencyFeeInr;
 
     // Currency conversion
     const curr = currencyRates[currentCurrency];
-    const displayTotal = currentCurrency === 'INR' 
-      ? Math.round(totalInr) 
-      : Math.round(totalInr * curr.multiplier);
+    const convertPrice = (inrVal) => {
+      return currentCurrency === 'INR' 
+        ? Math.round(inrVal) 
+        : Math.round(inrVal * curr.multiplier);
+    };
+
+    const displayBase = convertPrice(baseInr);
+    const displayGrandTotal = convertPrice(grandTotalInr);
+    const displayEmergencyFee = convertPrice(emergencyFeeInr);
 
     // Update UI elements
     const priceEl = document.getElementById('calcTotalPrice');
@@ -347,25 +457,91 @@ function setupCalculator() {
     const baseSummaryEl = document.getElementById('calcBaseSummary');
     const addonsSummaryEl = document.getElementById('calcAddonsSummary');
     
-    if (priceEl) priceEl.textContent = displayTotal.toLocaleString();
+    if (priceEl) priceEl.textContent = displayGrandTotal.toLocaleString();
     if (symbolEl) symbolEl.textContent = curr.symbol;
-    if (baseSummaryEl) baseSummaryEl.textContent = `${brandData.name} Base Config`;
+    if (baseSummaryEl) baseSummaryEl.textContent = brandData.name;
     if (addonsSummaryEl) {
-      addonsSummaryEl.textContent = selectedAddonNames.length > 0 
-        ? `${selectedAddonNames.length} add-on features selected` 
-        : 'Core configuration only';
+      addonsSummaryEl.textContent = selectedAddonItems.length > 0 
+        ? `${selectedAddonItems.length} add-on${selectedAddonItems.length > 1 ? 's' : ''} selected` 
+        : '0 add-ons (Base Setup Only)';
+    }
+
+    // Render detailed itemized calculation breakdown (The Receipt)
+    if (breakdownListEl) {
+      let rowsHtml = '';
+
+      // 1. Base Setup Row
+      rowsHtml += `
+        <div class="calc-receipt-row">
+          <div class="flex items-start gap-2.5">
+            <span class="w-5 h-5 rounded-full bg-blue-100 text-[#005CE6] flex items-center justify-center text-xs font-bold font-mono flex-shrink-0 mt-0.5">1</span>
+            <div>
+              <span class="font-bold text-[#001737] block leading-tight">Base Setup: ${brandData.name}</span>
+              <span class="text-xs text-slate-500 leading-tight">${brandData.desc}</span>
+            </div>
+          </div>
+          <span class="font-mono font-bold text-[#001737] text-sm whitespace-nowrap ml-3">${curr.symbol}${displayBase}</span>
+        </div>
+      `;
+
+      // 2. Selected Add-ons or "None"
+      if (selectedAddonItems.length > 0) {
+        selectedAddonItems.forEach((addon, idx) => {
+          const addonPriceConverted = convertPrice(addon.price);
+          rowsHtml += `
+            <div class="calc-receipt-row">
+              <div class="flex items-start gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold font-mono flex-shrink-0 mt-0.5">+</span>
+                <div>
+                  <span class="font-bold text-[#001737] block leading-tight">${addon.name}</span>
+                  <span class="text-xs text-slate-500 leading-tight">${addon.desc}</span>
+                </div>
+              </div>
+              <span class="font-mono font-semibold text-emerald-700 text-sm whitespace-nowrap ml-3">+${curr.symbol}${addonPriceConverted}</span>
+            </div>
+          `;
+        });
+      } else {
+        rowsHtml += `
+          <div class="calc-receipt-row opacity-80">
+            <div class="flex items-center gap-2.5 text-xs text-slate-500">
+              <span class="w-5 h-5 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center text-xs font-mono font-bold flex-shrink-0">0</span>
+              <span>No optional add-ons selected (Clean standard single-device setup)</span>
+            </div>
+            <span class="font-mono text-xs text-slate-400">+${curr.symbol}0</span>
+          </div>
+        `;
+      }
+
+      // 3. Emergency SOS row if active
+      if (isEmergency) {
+        rowsHtml += `
+          <div class="calc-receipt-row bg-amber-50/80 -mx-2 px-2 py-1.5 rounded-lg border border-amber-200/60">
+            <div class="flex items-start gap-2.5">
+              <span class="w-5 h-5 rounded-full bg-amber-200 text-amber-800 flex items-center justify-center text-xs font-bold font-mono flex-shrink-0 mt-0.5">🚨</span>
+              <div>
+                <span class="font-bold text-amber-900 block leading-tight">Priority SOS Emergency Dispatch</span>
+                <span class="text-xs text-amber-700 leading-tight">Priority queue jump — engineer connects in 30-60 mins (+20%)</span>
+              </div>
+            </div>
+            <span class="font-mono font-bold text-amber-800 text-sm whitespace-nowrap ml-3">+${curr.symbol}${displayEmergencyFee}</span>
+          </div>
+        `;
+      }
+
+      breakdownListEl.innerHTML = rowsHtml;
     }
 
     // Build customized WhatsApp URL
     const sendWhatsappBtn = document.getElementById('calcSendWhatsappBtn');
     if (sendWhatsappBtn) {
-      const addonsText = selectedAddonNames.length > 0 
-        ? `\n• Features: ${selectedAddonNames.join(', ')}` 
-        : '\n• Features: Standard Initial Configuration';
+      let addonsTextList = selectedAddonItems.length > 0 
+        ? selectedAddonItems.map(a => `  • ${a.name} (+${curr.symbol}${convertPrice(a.price)})`).join('\n')
+        : '  • Standard Initial Setup (No extra add-ons)';
       
-      const urgencyText = isEmergency ? '🚨 Emergency Setup (< 1 Hour)' : 'Standard Setup';
+      const urgencyText = isEmergency ? '🚨 Priority SOS (< 1 Hour)' : 'Standard Setup (Within 24 Hours)';
       
-      const message = `Hello Network Engineer! 👋\n\nI need a one-time network configuration:\n• Brand: ${brandData.name}${addonsText}\n• Urgency: ${urgencyText}\n• Estimated Quote: ${curr.symbol}${displayTotal}\n\nCould you please check availability and connect via UltraViewer / AnyDesk? Thank you!`;
+      const message = `Hello Network Engineer! 👋\n\nI calculated my setup cost on your website:\n• Equipment: ${brandData.name} (${curr.symbol}${displayBase})\n• Features Selected:\n${addonsTextList}\n• Urgency: ${urgencyText}\n• Total Calculated Price: ${curr.symbol}${displayGrandTotal} (Zero Advance • 100% Pay After Testing)\n\nCould you please check availability and connect via UltraViewer / AnyDesk? Thank you!`;
       
       const encodedMsg = encodeURIComponent(message);
       sendWhatsappBtn.href = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodedMsg}`;
@@ -373,9 +549,7 @@ function setupCalculator() {
   }
 
   // Event Listeners
-  brandSelect.addEventListener('change', recalculate);
   urgencySelect.addEventListener('change', recalculate);
-  checkboxes.forEach(cb => cb.addEventListener('change', recalculate));
 
   if (currencyToggle) {
     currencyToggle.addEventListener('click', () => {
@@ -913,34 +1087,40 @@ function setupGuideModal() {
   const openTopBtn = document.getElementById('openGuideModalTopBtn');
   const openStepBtn = document.getElementById('openGuideModalStepBtn');
   const closeBtn = document.getElementById('closeGuideModalBtn');
+  const cancelBtn = document.getElementById('cancelGuideModalBtn');
 
   if (!modal) return;
 
-  function openModal() {
+  function openModal(e) {
+    if (e && e.preventDefault) e.preventDefault();
     modal.classList.remove('hidden');
+    modal.style.setProperty('display', 'flex', 'important');
     document.body.style.overflow = 'hidden';
   }
 
-  function closeModal() {
+  function closeModal(e) {
+    if (e && e.preventDefault) e.preventDefault();
     modal.classList.add('hidden');
+    modal.style.setProperty('display', 'none', 'important');
     document.body.style.overflow = '';
   }
 
   if (openTopBtn) openTopBtn.addEventListener('click', openModal);
   if (openStepBtn) openStepBtn.addEventListener('click', openModal);
   if (closeBtn) closeBtn.addEventListener('click', closeModal);
+  if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
 
-  // Close when clicking backdrop outside modal content
+  // Close when clicking backdrop outside modal card
   modal.addEventListener('click', (e) => {
     if (e.target === modal) {
-      closeModal();
+      closeModal(e);
     }
   });
 
   // Close on Escape key
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
-      closeModal();
+    if (e.key === 'Escape') {
+      closeModal(e);
     }
   });
 }
