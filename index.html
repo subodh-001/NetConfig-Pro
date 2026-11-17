@@ -331,9 +331,9 @@
   }
   </script>
 
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
+  <!-- Tailwind CSS CDN (with Cloudflare Rocket Loader bypass) -->
+  <script src="https://cdn.tailwindcss.com" data-cfasync="false"></script>
+  <script data-cfasync="false">
     tailwind.config = {
       darkMode: 'class',
       theme: {
@@ -362,7 +362,7 @@
   </script>
 
   <!-- Custom Stylesheet with Reference Theme -->
-  <link rel="stylesheet" href="css/styles.css?v=3.0">
+  <link rel="stylesheet" href="css/styles.css?v=5.0">
 </head>
 <body class="bg-[#FFFFFF] text-[#001737] font-sans selection:bg-[#001737] selection:text-white">
 
@@ -2261,7 +2261,7 @@
         <!-- Simulation Control & Live Diagnostic Log -->
         <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-[#E2E8F0]">
           <button id="simulateFailoverBtn" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-[#005CE6] hover:bg-[#0047BA] text-white font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-md">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728B9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path></svg>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path></svg>
             <span>Cut ISP 1 Cable (Test Failover)</span>
           </button>
 
@@ -3671,6 +3671,6 @@
   </div>
 
   <!-- Main JavaScript File -->
-  <script src="js/main.js?v=2.5"></script>
+  <script src="js/main.js?v=5.0" data-cfasync="false"></script>
 </body>
 </html>
