@@ -36,7 +36,7 @@ const basePricing = {
     unifi: { name: 'Ubiquiti UniFi (UDM, Gateway, USW, U6/U7)', category: 'router', base: 799, desc: 'UniFi Network controller adoption, SSID & routing setup' },
     cisco: { name: 'Cisco Switches & Routers (Catalyst, SG, CBS)', category: 'switch', base: 899, desc: 'CLI console setup, VLAN trunking, SSH & port hardening' },
     cctv: { name: 'CCTV NVR / DVR & IP Cameras (Hikvision, Dahua, CP Plus)', category: 'cctv', base: 599, desc: 'NVR network setup, camera IP assignment & phone app' },
-    fortinet: { name: 'Fortinet FortiGate Firewall', category: 'firewall', base: 1499, desc: 'Policy routes, interfaces, NAT & security profiles' },
+    fortinet: { name: 'Fortinet FortiGate Firewall (40F, 60F, 70F, 100F)', category: 'firewall', base: 1499, desc: 'Policy routes, SD-WAN, NAT & security profiles' },
     sonicwall: { name: 'SonicWall TZ & NSa Firewalls', category: 'firewall', base: 1499, desc: 'Access rules, NAT policies & interface security zones' },
     sophos: { name: 'Sophos XGS Next-Gen Firewall', category: 'firewall', base: 1499, desc: 'Firewall rules, NAT policies & SSL inspection setup' },
     pfsense: { name: 'pfSense / OPNsense Appliance', category: 'firewall', base: 1299, desc: 'WAN/LAN interfaces, gateway routing, DNS & packages' },
