@@ -1,6 +1,60 @@
+# ==============================================================================
+# Robots.txt for NetConfig Pro (SEO + AI / LLM Search Crawlers)
+# Production Host: https://netconfig.alwaystherevault.com/
+# Canonical Host: https://netconfigpro.com/
+# ==============================================================================
+
+# Default Search Engines (Google, Bing, Yahoo, DuckDuckGo)
 User-agent: *
 Allow: /
 
+# OpenAI / ChatGPT Search Crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Perplexity AI Crawlers
+User-agent: PerplexityBot
+Allow: /
+
+# Google Gemini & Google AI Overviews
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+# Anthropic Claude Crawlers
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Apple Intelligence
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Common Crawl (Foundation datasets for open-source LLMs)
+User-agent: CCBot
+Allow: /
+
+# Microsoft Bing (Powers Copilot & ChatGPT Web Search)
+User-agent: Bingbot
+Allow: /
+
+# Sitemaps & LLM Knowledge Files
 Sitemap: https://netconfig.alwaystherevault.com/sitemap.xml
 Sitemap: https://netconfigpro.com/sitemap.xml
 
+# Official LLM Context File for AI Citations (https://llmstxt.org)
+# AI models fetch this file directly to understand services, pricing, and contact info
+# LLMs.txt: https://netconfig.alwaystherevault.com/llms.txt
